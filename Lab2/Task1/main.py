@@ -1,5 +1,7 @@
 import utilities
 
-text = "fsfsajf;sa. B.S.U.I.R. fslfasljl fssdferwopoi... fskf fjlsdfjs fjldsfs. fks;l dferwep fdk! jfggsdlgs."
+text = "fsfsajf;sa. B.S.U.I.R. fslfasljl fssdferwopoi... fskf fjlsdfjs fjldsfs. fks;l dferwep fdk! jfggsdlgs. cpoenmv?"
 
-print(utilities.get_amount_of_declarative_sentences(text))
+print(utilities.get_amount_of_sentences(text))
+print(utilities.get_amount_of_non_declarative_sentences(text))
+
