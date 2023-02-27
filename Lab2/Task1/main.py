@@ -4,4 +4,4 @@ text = "fsfsajf;sa. B.S.U.I.R. fslfasljl fssdferwopoi... fskf fjlsdfjs fjldsfs. 
 
 print(utilities.get_amount_of_sentences(text))
 print(utilities.get_amount_of_non_declarative_sentences(text))
-
+print(utilities.get_average_amount_of_words_in_sentence(text))
