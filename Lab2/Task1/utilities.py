@@ -30,5 +30,16 @@ def get_amount_of_non_declarative_sentences(text):
     return count
 
 
-def get_average_amount_of_words_in_sentence(text):
+def get_average_amount_of_characters_in_words(text):
+    symbols_count = 0
+    words_count = 0
     list_of_sentences = get_list_of_sentences(text)
+    list_of_words = []
+    for sentence in list_of_sentences:
+        list_of_words = sentence.split()
+        for word in list_of_words:
+            if word.isdigit():
+                continue
+            symbols_count += len(word)
+            words_count += 1
+    return symbols_count / words_count
