@@ -1,0 +1,4 @@
+DECLARATIVE_PATTERN = "(?<![A-Z])(?<!Dr)(?<!Mr)(?<!Mrs)(?<!Ave)(?<!Blvd)(?<!Ln)(?<!Rd)(?<!Inc)(\.+|\!+\?+|\?+\!+|\?+|\!+)"
+TWO_WORDS_ABBREVIATIONS = ['e.g.', 'i.e.', 'p.s.', 'ph.d.', 'a.m.', 'p.m.']
+NON_DECLARATIVE_PATTERN = "(\!+\?+|\?+\!+|\?+|\!+)"
+
