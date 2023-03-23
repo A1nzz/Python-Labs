@@ -11,5 +11,5 @@ text = "There are p.m. usually about 200 words in a paragraph, " \
 print(utilities.get_amount_of_sentences(text))
 print(utilities.get_amount_of_non_declarative_sentences(text))
 print(utilities.get_average_amount_of_characters_in_sentence(text))
-print(utilities.get_average_amount_of_characters_in_words(text))
-
+print(utilities.get_average_amount_of_characters_in_word(text))
+print(utilities.get_top_grams(text, 1, 1))
