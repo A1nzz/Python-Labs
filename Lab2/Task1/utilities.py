@@ -34,15 +34,15 @@ def get_average_amount_of_characters_in_word(text):
     return number_of_characters / len(words)
 
 
-def get_top_grams(text, k=10, n=4):
+def get_top_grams(text: str, k=10, n=4):
     n_grams: dict[str, int] = {}
     words = re.findall(constants.WORD_PATTERN, text.lower())  # including numbers and register does not matter
-    for word_index in range(len(words) - n):
-        n_gram = " ".join(word for word in words[word_index:word_index + n])
+    for word_index in range(len(words) - int(n) + 1):
+        n_gram = ' '.join(str(word) for word in words[word_index:word_index + int(n)])
         if n_gram in n_grams:
             n_grams[n_gram] += 1
         else:
             n_grams[n_gram] = 1
     sorted_n_grams = sorted(n_grams.items(), reverse=True, key=lambda item: item[1])
-    result = sorted_n_grams[0:k]
+    result = sorted_n_grams[0:int(k)]
     return result
