@@ -1,9 +1,11 @@
 import re
+import json
+import os
 
 
 class MyContainer:
     def __init__(self, username):
-        self.username == username
+        self.username = username
         self.storage = set()
 
     def add(self, key):
@@ -30,13 +32,21 @@ class MyContainer:
         is_something_match = False
         for key in self.storage:
             if re.match(regex, key):
-                print("key")
+                print(f"{key}")
                 is_something_match = True
-        if is_something_match:
+        if not is_something_match:
             print("No such elements")
 
-    def save(self, filename: str):
+    def save(self):
+        with open(f'./containers/{self.username}.json', 'w') as fp:
+            json.dump(list(self.storage), fp)
 
+    def load(self):
+        if os.path.exists(f'./containers/{self.username}.json'):
+            with open(f'./containers/{self.username}.json', 'r') as fp:
+                self.storage = set(json.load(fp))
 
-    def load(self, filename: str):
-
+    def switch(self, username):
+        self.username = username
+        self.storage.clear()
+        self.load()
