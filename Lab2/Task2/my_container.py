@@ -7,6 +7,7 @@ class MyContainer:
     def __init__(self, username):
         self.username = username
         self.storage = set()
+        self.switch(username)
 
     def add(self, key):
         if key not in self.storage:
@@ -38,15 +39,23 @@ class MyContainer:
             print("No such elements")
 
     def save(self):
+        os.makedirs(os.path.dirname(f'./containers/{self.username}.json'), exist_ok=True)
         with open(f'./containers/{self.username}.json', 'w') as fp:
             json.dump(list(self.storage), fp)
 
     def load(self):
         if os.path.exists(f'./containers/{self.username}.json'):
             with open(f'./containers/{self.username}.json', 'r') as fp:
-                self.storage = set(json.load(fp))
+                self.storage.update(set(json.load(fp)))
+        else:
+            print(f"There is no such user! Created new container for user {self.username}")
 
     def switch(self, username):
         self.username = username
         self.storage.clear()
-        self.load()
+        if os.path.exists(f'./containers/{self.username}.json'):
+            answer = input("Do you want to load the container?(y,n): ")
+            if answer.lower() == "y":
+                self.load()
+        else:
+            print(f"Created new container for user {self.username}")
