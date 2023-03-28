@@ -35,6 +35,10 @@ class GetAverageAmountOfCharactersInSentence(TestCase):
         text = "Some 1234 123tence? Some sentence 3123! 3123213 some sentence!?"
         self.assertEqual(utilities.get_average_amount_of_characters_in_sentence(text), 12)
 
+    def test_empty(self):
+        text = ""
+        self.assertEqual(utilities.get_average_amount_of_characters_in_sentence(text), 0)
+
 
 class GetAverageAmountOfCharactersInWord(TestCase):
     def test_default_text(self):
@@ -44,6 +48,10 @@ class GetAverageAmountOfCharactersInWord(TestCase):
     def test_text_with_numbers(self):
         text = "Some 1234 123tence? Some sentence 3123! 3123213 some sentence!?"
         self.assertEqual(utilities.get_average_amount_of_characters_in_word(text), 6)
+
+    def test_empty(self):
+        text = ""
+        self.assertEqual(utilities.get_average_amount_of_characters_in_word(text), 0)
 
 
 class GetTopGrams(TestCase):

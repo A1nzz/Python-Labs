@@ -25,13 +25,18 @@ if __name__ == "__main__":
         match command:
             case "add":
                 key = input("Input key to add: ")
-                container.add(key)
+                key = key.split()
+                for el in key:
+                    container.add(el)
+
             case "remove":
                 key = input("Input key to remove: ")
                 container.remove(key)
             case "find":
                 key = input("Input key to find: ")
-                container.remove(key)
+                key = key.split()
+                for el in key:
+                    container.find(el)
             case "list":
                 container.list()
             case "grep":
