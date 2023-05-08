@@ -1,3 +1,6 @@
+TYPE_FIELD = "TYPE"
+VALUE_FIELD = "VALUE"
+
 CLASS_NAME = "class"
 OBJECT_NAME = "object"
 DICTIONARY_NAME = "dict"
