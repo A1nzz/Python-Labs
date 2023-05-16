@@ -1,11 +1,11 @@
 import inspect
-from constants import *
+from Lab3.Serializers import nonetype, moduletype, codetype, celltype, \
+                          functype, bldinfunctype, \
+                          mapproxytype, wrapdesctype, metdesctype, getsetdesctype, \
+                          CODE_PROPS, UNIQUE_TYPES
 
 
-class Serializer:
-
-    # consts for keywords
-
+class DictSerializer:
     TYPE_KW = "type"
     SOURCE_KW = "source"
 
@@ -23,22 +23,22 @@ class Serializer:
     OBJECT_KW = "object"
 
     @classmethod
-    def serialize(cls, obj, is_inner_func=False):
+    def to_dict(cls, obj, is_inner_func=False):
         if type(obj) in (int, float, bool, str, nonetype):
             return obj
 
         if type(obj) is list:
-            return [cls.serialize(o) for o in obj]
+            return [cls.to_dict(o) for o in obj]
 
         if type(obj) is dict:
             # Since the key in the dictionary can be a hashable object, which will be represented as a non-hashable
             # dictionary, it is easier to represent the dictionary as a list of key-value pairs
             return {cls.TYPE_KW: dict.__name__,
-                    cls.SOURCE_KW: [[cls.serialize(item[0]), cls.serialize(item[1])] for item in obj.items()]}
+                    cls.SOURCE_KW: [[cls.to_dict(item[0]), cls.to_dict(item[1])] for item in obj.items()]}
 
         if type(obj) in (set, frozenset, tuple, bytes, bytearray):
             return {cls.TYPE_KW: type(obj).__name__,
-                    cls.SOURCE_KW: cls.serialize([*obj])}
+                    cls.SOURCE_KW: cls.to_dict([*obj])}
 
         if type(obj) is complex:
             return {cls.TYPE_KW: complex.__name__,
@@ -55,37 +55,37 @@ class Serializer:
 
             for (key, value) in inspect.getmembers(obj):
                 if key in CODE_PROPS:
-                    source[key] = cls.serialize(value)
+                    source[key] = cls.to_dict(value)
 
             code.update({cls.SOURCE_KW: source})
             return code
 
         if type(obj) is celltype:
             return {cls.TYPE_KW: celltype.__name__,
-                    cls.SOURCE_KW: cls.serialize(obj.cell_contents)}
+                    cls.SOURCE_KW: cls.to_dict(obj.cell_contents)}
 
         if type(obj) in (staticmethod, classmethod):
             return {cls.TYPE_KW: type(obj).__name__,
-                    cls.SOURCE_KW: cls.serialize(obj.__func__, is_inner_func)}
+                cls.SOURCE_KW: cls.to_dict(obj.__func__, is_inner_func)}
 
         if inspect.isroutine(obj):
             source = {}
 
             # Code
-            source[cls.CODE_KW] = cls.serialize(obj.__code__)
+            source[cls.CODE_KW] = cls.to_dict(obj.__code__)
 
             # Global vars
             gvars = cls.__get_gvars(obj, is_inner_func)
-            source[cls.GLOBALS_KW] = cls.serialize(gvars)
+            source[cls.GLOBALS_KW] = cls.to_dict(gvars)
 
             # Name
-            source[cls.NAME_KW] = cls.serialize(obj.__name__)
+            source[cls.NAME_KW] = cls.to_dict(obj.__name__)
 
             # Defaults
-            source[cls.DEFAULTS_KW] = cls.serialize(obj.__defaults__)
+            source[cls.DEFAULTS_KW] = cls.to_dict(obj.__defaults__)
 
             # Closure
-            source[cls.CLOSURE_KW] = cls.serialize(obj.__closure__)
+            source[cls.CLOSURE_KW] = cls.to_dict(obj.__closure__)
 
             return {cls.TYPE_KW: functype.__name__,
                     cls.SOURCE_KW: source}
@@ -94,10 +94,10 @@ class Serializer:
             source = {}
 
             # Name
-            source[cls.NAME_KW] = cls.serialize(obj.__name__)
+            source[cls.NAME_KW] = cls.to_dict(obj.__name__)
 
             # Bases
-            source[cls.BASES_KW] = cls.serialize(tuple(b for b in obj.__bases__ if b != object))
+            source[cls.BASES_KW] = cls.to_dict(tuple(b for b in obj.__bases__ if b != object))
 
             # Dict
             source[cls.DICT_KW] = cls.__get_obj_dict(obj)
@@ -109,7 +109,7 @@ class Serializer:
             source = {}
 
             # Class
-            source[cls.CLASS_KW] = cls.serialize(obj.__class__)
+            source[cls.CLASS_KW] = cls.to_dict(obj.__class__)
 
             # Dict
             source[cls.DICT_KW] = cls.__get_obj_dict(obj)
@@ -135,7 +135,7 @@ class Serializer:
                     # To prevent recursion, the class in which this method is declared is replaced with the
                     # name of the class. In the future, this name will be replaced by the class type
                     c = func.__globals__[gvar_name]
-                    if is_inner_func and name in c.__dict__ and func == c.__dict__[name].__func__:  # !!!!
+                    if is_inner_func and name in c.__dict__ and func == c.__dict__[name].__func__: #!!!!
                         gvars[gvar_name] = c.__name__
                     else:
                         gvars[gvar_name] = c
@@ -158,36 +158,36 @@ class Serializer:
             if type(value) not in UNIQUE_TYPES:
                 if inspect.isroutine(value):
                     # Recursion protection
-                    dct2[cls.serialize(key)] = cls.serialize(value, is_inner_func=True)
+                    dct2[cls.to_dict(key)] = cls.to_dict(value, is_inner_func=True)
                 else:
-                    dct2[cls.serialize(key)] = cls.serialize(value)
+                    dct2[cls.to_dict(key)] = cls.to_dict(value)
 
         return dct2
 
     @classmethod
-    def deserialize(cls, obj, is_dict=False):
+    def from_dict(cls, obj, is_dict=False):
 
         if is_dict:
-            return {cls.deserialize(item[0]): cls.deserialize(item[1]) for item in obj}
+            return {cls.from_dict(item[0]): cls.from_dict(item[1]) for item in obj}
 
         if type(obj) not in (dict, list):
             return obj
 
         elif type(obj) is list:
-            return [cls.deserialize(o) for o in obj]
+            return [cls.from_dict(o) for o in obj]
 
         else:
             obj_type = obj[cls.TYPE_KW]
             obj_source = obj[cls.SOURCE_KW]
 
             if obj_type == dict.__name__:
-                return cls.deserialize(obj_source, is_dict=True)
+                return cls.from_dict(obj_source, is_dict=True)
 
             # Key - type name, value - type itself. Calling by type name returns that type.
             # This is necessary for the same creation of simple collections.
             cols_dict = {t.__name__: t for t in [set, frozenset, tuple, bytes, bytearray]}
             if obj_type in cols_dict:
-                return cols_dict[obj_type](cls.deserialize(obj_source))
+                return cols_dict[obj_type](cls.from_dict(obj_source))
 
             if obj_type == complex.__name__:
                 return obj_source[complex.real.__name__] + \
@@ -197,23 +197,23 @@ class Serializer:
                 return __import__(obj_source)
 
             if obj_type == codetype.__name__:
-                return codetype(*[cls.deserialize(obj_source[prop]) for prop in CODE_PROPS])
+                return codetype(*[cls.from_dict(obj_source[prop]) for prop in CODE_PROPS])
 
             if obj_type == celltype.__name__:
-                return celltype(cls.deserialize(obj_source))
+                return celltype(cls.from_dict(obj_source))
 
             if obj_type == staticmethod.__name__:
-                return staticmethod(cls.deserialize(obj_source))
+                return staticmethod(cls.from_dict(obj_source))
 
             if obj_type == classmethod.__name__:
-                return classmethod(cls.deserialize(obj_source))
+                return classmethod(cls.from_dict(obj_source))
 
             if obj_type == functype.__name__:
-                code = cls.deserialize(obj_source[cls.CODE_KW])
-                gvars = cls.deserialize(obj_source[cls.GLOBALS_KW])
-                name = cls.deserialize(obj_source[cls.NAME_KW])
-                defaults = cls.deserialize(obj_source[cls.DEFAULTS_KW])
-                closure = cls.deserialize(obj_source[cls.CLOSURE_KW])
+                code = cls.from_dict(obj_source[cls.CODE_KW])
+                gvars = cls.from_dict(obj_source[cls.GLOBALS_KW])
+                name = cls.from_dict(obj_source[cls.NAME_KW])
+                defaults = cls.from_dict(obj_source[cls.DEFAULTS_KW])
+                closure = cls.from_dict(obj_source[cls.CLOSURE_KW])
 
                 # If there are suitable global variables, they are replaced.
                 for key in gvars:
@@ -229,10 +229,10 @@ class Serializer:
                 return func
 
             if obj_type == type.__name__:
-                name = cls.deserialize(obj_source[cls.NAME_KW])
-                bases = cls.deserialize(obj_source[cls.BASES_KW])
+                name = cls.from_dict(obj_source[cls.NAME_KW])
+                bases = cls.from_dict(obj_source[cls.BASES_KW])
                 dct = obj_source[cls.DICT_KW]
-                dct = {cls.deserialize(item[0]): cls.deserialize(item[1]) for item in dct.items()}
+                dct = {cls.from_dict(item[0]): cls.from_dict(item[1]) for item in dct.items()}
 
                 cl = type(name, bases, dct)
 
@@ -251,11 +251,16 @@ class Serializer:
                 return cl
 
             else:
-                clas = cls.deserialize(obj_source[cls.CLASS_KW])
+                clas = cls.from_dict(obj_source[cls.CLASS_KW])
                 dct = obj_source[cls.DICT_KW]
-                dct = {cls.deserialize(item[0]): cls.deserialize(item[1]) for item in dct.items()}
+                dct = {cls.from_dict(item[0]): cls.from_dict(item[1]) for item in dct.items()}
 
                 o = object.__new__(clas)
                 o.__dict__ = dct
 
                 return o
+
+
+
+
+

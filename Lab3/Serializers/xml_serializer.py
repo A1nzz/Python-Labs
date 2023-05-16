@@ -1,9 +1,10 @@
 import re
-import regex
-from base_serializer import BaseSerializer
-from serializer import Serializer
 
-from serializer import nonetype
+import regex
+from Lab3.Serializers import BaseSerializer
+from Lab3.Serializers import DictSerializer
+
+from Lab3.Serializers import nonetype
 
 
 class XmlSerializer(BaseSerializer):
@@ -27,7 +28,7 @@ class XmlSerializer(BaseSerializer):
                                 fr"(?P<{VALUE_GROUP_NAME}>([^<>]*)|(?R)+)\</(?:{ELEMENTARY_NAMES_PATTERN})\>)"
 
     def dumps(self, obj) -> str:
-        obj = Serializer.serialize(obj)
+        obj = DictSerializer.to_dict(obj)
         return self.__dumps_from_dict(obj, is_first=True)
 
     def __dumps_from_dict(self, obj, is_first=False) -> str:
@@ -52,7 +53,7 @@ class XmlSerializer(BaseSerializer):
 
     def loads(self, string: str):
         obj = self.__loads_to_dict(string, is_first=True)
-        return Serializer.deserialize(obj)
+        return DictSerializer.from_dict(obj)
 
     def __loads_to_dict(self, string: str, is_first=False):
         string = string.strip()

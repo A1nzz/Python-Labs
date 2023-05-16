@@ -1,8 +1,10 @@
 import re
 import regex
-from base_serializer import BaseSerializer
-from serializer import Serializer
-from serializer import nonetype
+from Lab3.Serializers import BaseSerializer
+from Lab3.Serializers import DictSerializer
+
+
+from Lab3.Serializers import nonetype
 
 
 class JsonSerializer(BaseSerializer):
@@ -30,7 +32,7 @@ class JsonSerializer(BaseSerializer):
                     fr"{ARRAY_PATTERN}|{OBJECT_PATTERN})\s*"
 
     def dumps(self, obj) -> str:
-        obj = Serializer.serialize(obj)
+        obj = DictSerializer.to_dict(obj)
         return self.__dumps_from_dict(obj)
 
     def __dumps_from_dict(self, obj) -> str:
@@ -57,7 +59,7 @@ class JsonSerializer(BaseSerializer):
 
     def loads(self, string: str):
         obj = self.__loads_to_dict(string)
-        return Serializer.serialize(obj)
+        return DictSerializer.from_dict(obj)
 
     def __loads_to_dict(self, string: str):
         string = string.strip()
@@ -103,7 +105,7 @@ class JsonSerializer(BaseSerializer):
             # Variable matches will store key-value pairs in one row. Elements with
             # even indexes are keys, those with odd indexes are values.
             return {self.__loads_to_dict(matches[i][0]):
-                        self.__loads_to_dict(matches[i + 1][0]) for i in range(0, len(matches), 2)}
+                    self.__loads_to_dict(matches[i + 1][0]) for i in range(0, len(matches), 2)}
 
         else:
             raise ValueError
@@ -115,3 +117,4 @@ class JsonSerializer(BaseSerializer):
     @staticmethod
     def __unmask_quotes(string: str) -> str:
         return string.replace('\\\\', "\\").replace(r"\"", '"').replace(r"\'", "'")
+

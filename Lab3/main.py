@@ -1,16 +1,82 @@
-# This is a sample Python script.
+from Serializers.serializers_factory import SerializersFactory
+from Serializers.serializers_factory import SerializerType
+Json = SerializersFactory.create_serializer(SerializerType.XML)
+Xml = SerializersFactory.create_serializer(SerializerType.JSON)
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+class T:
+    A = "asdf"
+    B = 11
+    C = 14
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def my_decorator(func):
+    def cwrapper(*args, **kwargs):
+        print("start func")
+        func(*args, **kwargs)
+        print("end func")
+
+    return cwrapper
 
 
-# Press the green button in the gutter to run the script.
+def for_dec(a):
+    print("Hello world", a)
+
+
+df = my_decorator(for_dec)
+
+
+class A:
+    a = "A"
+
+
+class B(A):
+    a = "B"
+
+
+class C(A):
+    a = "C"
+
+
+class D(B, C):
+    a = "D"
+
+
+class Kek:
+    @classmethod
+
+    def clm(self):
+        return 5
+
+    @staticmethod
+
+    def sm(self):
+        return 4
+
+
+def decorate(function):
+    def wrap(*args):
+        if len(args) >= 10:
+            raise ("10+")
+        function(args)
+
+    return wrap
+
+
+@decorate
+def func(*args):
+    return args.__len__()
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    with open("json_file.json", "w") as file:
+        Json.dump(func(1, 2, 3, 4, 5, 6, 7, 8, 9), file)
+    with open("json_file.json", "r") as file:
+        obj = Json.load(file)
+        print(obj)
+
+    with open("xml_file.xml", "w") as file:
+        Xml.dump((1, 2, 3, 4, 5, 6), file)
+    with open("xml_file.xml", "r") as file:
+        obj = Xml.load(file)
+        print(obj)
