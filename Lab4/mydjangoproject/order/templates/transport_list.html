@@ -1,0 +1,33 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if transport_list %}
+<section class="services bg-secondary pt-4">
+    <div class="container">
+        <h2 style="margin-left: 2rem; color: white">Services</h2>
+        <div class="services__inner d-flex flex-wrap">
+
+            {% for transport in transport_list %}
+
+            <div class="card" style="width: 18rem; margin: 2rem">
+                <img src="../static/images/1500x500.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ transport.name }}</h5>
+
+                    <p class="card-text">
+                        Тип: {{transport.type}}
+                        <br>
+                        Тип кузова: {{transport.body_type}}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+{% else %}
+<p>There are no transport.</p>
+{% endif %}
+{% endblock %}

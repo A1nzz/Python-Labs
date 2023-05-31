@@ -1,0 +1,54 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<section>
+    <div class="home-start__section">
+        <div class="container">
+            <div class="row">
+                <div class="col-8 start-text">
+                    <h1>StathamTrans</h1>
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing
+                        and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley of type and scrambled
+                        it to make a type specimen book.
+                    </p>
+                </div>
+                <div class="col-4 home__btn-col">
+                    <button type="button" class="btn btn-outline-light btn-large start-btn">Services</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% if service_list %}
+
+<section class="services bg-secondary pt-4">
+    <div class="container">
+        <h2 style="margin-left: 2rem; color: white">Services</h2>
+        <div class="services__inner d-flex flex-wrap">
+
+            {% for service in service_list %}
+
+            <div class="card" style="width: 18rem; margin: 2rem">
+                <img src="../static/images/1500x500.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ service.name }}</h5>
+
+                    <p class="card-text">
+                        Some quick example text to build on the card title and make up the bulk of the
+                        card's content.
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+{% else %}
+<p>There are no services.</p>
+{% endif %}
+{% endblock %}
+

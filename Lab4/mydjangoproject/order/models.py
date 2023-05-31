@@ -13,7 +13,10 @@ class Driver(models.Model):
 
     age = models.PositiveIntegerField()
 
-    transport = models.OneToOneField('Transport', on_delete=models.SET_NULL, null=True)
+    transport = models.OneToOneField('Transport', on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        ordering = ['age', 'last_name', 'first_name']
 
     def __str__(self):
         """
@@ -32,9 +35,9 @@ class Transport(models.Model):
     """Модель для транспорта"""
     name = models.CharField(max_length=255, blank=False)
 
-    type = models.ForeignKey('TransportType', on_delete=models.SET_NULL, null=True)
+    type = models.ForeignKey('TransportType', on_delete=models.CASCADE, null=True)
 
-    bodyType = models.ForeignKey('BodyType', on_delete=models.SET_NULL, null=True)
+    body_type = models.ForeignKey('BodyType', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -66,7 +69,7 @@ class Client(models.Model):
 class Cargo(models.Model):
     name = models.CharField(max_length=255, blank=False)
 
-    type = models.ForeignKey('CargoType', on_delete=models.SET_NULL, null=True)
+    type = models.ForeignKey('CargoType', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -80,13 +83,12 @@ class CargoType(models.Model):
 
 
 class Order(models.Model):
-    company = models.ForeignKey('TransportCompany', on_delete=models.SET_NULL, null=True)
 
-    driver = models.ForeignKey('Driver', on_delete=models.SET_NULL, null=True)
+    driver = models.ForeignKey('Driver', on_delete=models.CASCADE, null=True)
 
-    client = models.ForeignKey('Client', on_delete=models.SET_NULL, null=True)
+    client = models.ForeignKey('Client', on_delete=models.CASCADE, null=True)
 
-    cargo = models.ForeignKey('Cargo', on_delete=models.SET_NULL, null=True)
+    cargo = models.ForeignKey('Cargo', on_delete=models.CASCADE, null=True)
 
     cost = models.DecimalField(default=0, decimal_places=2, max_digits=30)
 
@@ -96,7 +98,7 @@ class Order(models.Model):
         return f'{self.date} driver: {self.driver} client: {self.client}'
 
 
-class TransportCompany(models.Model):
+class ServiceCategory(models.Model):
     name = models.CharField(max_length=255, blank=False)
 
     def __str__(self):
@@ -106,7 +108,7 @@ class TransportCompany(models.Model):
 class CompanyService(models.Model):
     name = models.CharField(max_length=255, blank=False)
 
-    company = models.ForeignKey('TransportCompany', on_delete=models.SET_NULL, null=True)
+    category = models.ManyToManyField(ServiceCategory)
 
     def __str__(self):
         return f'{self.name}'
