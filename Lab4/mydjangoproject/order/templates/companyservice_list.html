@@ -2,6 +2,46 @@
 
 {% block content %}
 
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="../create-order/">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="cargo-name" class="col-form-label">Товар: </label>
+                        <input type="text" class="form-control" id="cargo-name" name="cargo">
+                    </div>
+
+                    <select name="transport" class="form-select" aria-label="Default select example">
+                        {% for transport in transport_list %}
+                        <option  value="{{transport.id}}">{{transport}}</option>
+                        {% endfor %}
+                    </select>
+
+
+                    <select name="driver" class="form-select" aria-label="Default select example">
+                        {% for driver in drivers_list %}
+                        <option  value="{{driver.id}}">{{driver}}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary">Create Order</button>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% if service_list %}
 <section class="services bg-secondary pt-4">
     <div class="container">
@@ -11,7 +51,7 @@
             {% for service in service_list %}
 
             <div class="card" style="width: 18rem; margin: 2rem">
-                <img src="../static/images/1500x500.jpeg" class="card-img-top" alt="...">
+                <img src="../static/images/1500x500.jpeg" class="card-img-top" alt="">
                 <div class="card-body">
                     <h5 class="card-title">{{ service.name }}</h5>
 
@@ -19,6 +59,11 @@
                         Some quick example text to build on the card title and make up the bulk of the
                         card's content.
                     </p>
+                    <div class="mb-3">
+                        <span>Cost: {{service.cost}}</span>
+                    </div>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Create order</a>
+
                 </div>
             </div>
             {% endfor %}

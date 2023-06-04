@@ -5,7 +5,7 @@
 {% if drivers_list %}
 <section class="services bg-secondary pt-4">
     <div class="container">
-        <h2 style="margin-left: 2rem; color: white">Services</h2>
+        <h2 style="margin-left: 2rem; color: white">Drivers</h2>
         <div class="services__inner d-flex flex-wrap">
 
             {% for driver in drivers_list %}
@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ driver.first_name}} {{driver.last_name}}</h5>
                     <p class="card-text">
-                       Age: {{driver.age}}<br>Transport: {{driver.transport}}
+                       Age: {{driver.age}}
                     </p>
                 </div>
             </div>

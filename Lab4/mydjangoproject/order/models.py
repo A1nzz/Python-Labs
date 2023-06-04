@@ -13,8 +13,6 @@ class Driver(models.Model):
 
     age = models.PositiveIntegerField()
 
-    transport = models.OneToOneField('Transport', on_delete=models.CASCADE, null=True)
-
     class Meta:
         ordering = ['age', 'last_name', 'first_name']
 
@@ -84,15 +82,22 @@ class CargoType(models.Model):
 
 class Order(models.Model):
 
-    driver = models.ForeignKey('Driver', on_delete=models.CASCADE, null=True)
+    driver = models.ForeignKey('Driver', related_name='driver', on_delete=models.CASCADE, null=True)
+
+    transport = models.ForeignKey('Transport', on_delete=models.CASCADE, null=True)
 
     client = models.ForeignKey('Client', on_delete=models.CASCADE, null=True)
 
     cargo = models.ForeignKey('Cargo', on_delete=models.CASCADE, null=True)
 
+    service = models.ForeignKey('CompanyService', on_delete=models.CASCADE, null=True)
+
     cost = models.DecimalField(default=0, decimal_places=2, max_digits=30)
 
-    date = models.DateField()
+    date = models.DateField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['date', 'cost']
 
     def __str__(self):
         return f'{self.date} driver: {self.driver} client: {self.client}'
@@ -109,6 +114,8 @@ class CompanyService(models.Model):
     name = models.CharField(max_length=255, blank=False)
 
     category = models.ManyToManyField(ServiceCategory)
+
+    cost = models.DecimalField(default=0, decimal_places=2, max_digits=30)
 
     def __str__(self):
         return f'{self.name}'

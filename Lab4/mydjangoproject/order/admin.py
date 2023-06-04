@@ -7,8 +7,8 @@ from order.models import Transport, TransportType, BodyType, \
 
 @admin.register(Driver)
 class DriverAdmin(admin.ModelAdmin):
-    list_display = ('last_name', 'first_name', 'age', 'transport')
-    fields = [('last_name', 'first_name'), 'age', 'transport']
+    list_display = ('last_name', 'first_name', 'age')
+    fields = [('last_name', 'first_name'), 'age']
 
 
 @admin.register(Transport)
@@ -49,9 +49,8 @@ class CargoTypeAdmin(admin.ModelAdmin):
 
 @admin.register(CompanyService)
 class CompanyServiceAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['name', 'cost']
     list_filter = ['category']
-
 
 
 @admin.register(ServiceCategory)
@@ -61,7 +60,7 @@ class ServiceCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('date', 'client', 'driver', 'cost', 'cargo')
+    list_display = ('date', 'client', 'driver', 'transport', 'cost', 'cargo', 'service')
 
 
 admin.site.register(Client)
