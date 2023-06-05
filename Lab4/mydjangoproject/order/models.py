@@ -1,9 +1,35 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse  # Used to generate URLs by reversing the URL patterns
+from django.contrib.auth.models import BaseUserManager
+
+
+class MyUserManager(BaseUserManager):
+    def create_user(self, email, first_name, last_name, date_of_birth, phone_number, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The given email must be set')
+
+        email = self.normalize_email(email)
+        user = self.model(email=email, first_name=first_name, last_name=last_name,
+                          date_of_birth=date_of_birth, phone_number=phone_number, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email='', first_name='', last_name='', date_of_birth='2000-10-10', phone_number='+375 (29) 123-45-67', password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser is_staff must be True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser is_superuser must be True.')
+
+        return self.create_user(email, first_name, last_name, date_of_birth, phone_number, password, **extra_fields)
 
 
 # Create your models here.
-class Driver(models.Model):
+class Driver(AbstractUser):
     """"
     Модель для водителя
     """
@@ -11,22 +37,22 @@ class Driver(models.Model):
 
     last_name = models.CharField(max_length=255, blank=False)
 
-    age = models.PositiveIntegerField()
+    date_of_birth = models.DateField()
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=50)
 
-    class Meta:
-        ordering = ['age', 'last_name', 'first_name']
+    REQUIRED_FIELDS = ['first_name', 'last_name',
+                       'email', 'date_of_birth', 'phone_number']
+    USERNAME_FIELD = 'username'
+    objects = MyUserManager()
 
     def __str__(self):
         """
         String for representing the MyModelName object (in Admin site etc.)
         """
-        return f'{self.first_name} {self.last_name}'
+        return f'{self.first_name} {self.last_name} {self.email}'
 
-    def get_absolute_url(self):
-        """
-        Returns the url to access a particular book instance.
-        """
-        return reverse('driver-detail', args=[str(self.id)])
+
 
 
 class Transport(models.Model):
