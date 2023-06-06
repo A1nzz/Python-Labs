@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse  # Used to generate URLs by reversing the URL patterns
@@ -42,6 +44,14 @@ class Driver(AbstractUser):
     phone_number = models.CharField(max_length=50)
     groups = models.ManyToManyField('auth.Group', related_name='drivers', blank=True)
 
+    @property
+    def age(self):
+        today = date.today()
+        age = today.year - self.date_of_birth.year
+        if today.month < self.date_of_birth.month or (
+                today.month == self.date_of_birth.month and today.day < self.date_of_birth.day):
+            age -= 1
+        return age
 
     REQUIRED_FIELDS = ['first_name', 'last_name',
                        'email', 'date_of_birth', 'phone_number']
