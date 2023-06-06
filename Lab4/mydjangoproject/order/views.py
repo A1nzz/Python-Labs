@@ -1,4 +1,4 @@
-
+import requests
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponseNotFound
@@ -15,7 +15,13 @@ from .models import CompanyService, ServiceCategory, Driver, Transport, Order, C
 
 def index(request):
     service_list = CompanyService.objects.all()
-    return render(request, 'index.html', context={'service_list': service_list})
+    quote, author = get_random_quote()
+    context = {
+        'quote': quote,
+        'author': author,
+        'service_list': service_list
+    }
+    return render(request, 'index.html', context=context)
 
 
 # return only drivers
@@ -267,3 +273,14 @@ def delete_service(request, id):
     service = CompanyService.objects.get(id=id)
     service.delete()
     return redirect('services')
+
+
+def get_random_quote():
+    url = 'https://favqs.com/api/qotd'
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json().get('quote', '')
+        quote = data['body']
+        author = data['author']
+        return quote, author
+    return None, None
