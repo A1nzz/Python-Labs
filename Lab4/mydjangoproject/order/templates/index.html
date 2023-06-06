@@ -1,6 +1,24 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Random dog</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% if image_url %}
+                <img src="{{ image_url }}" alt="Random Dog" style="width: 100%; height: auto;">
+                {% else %}
+                <p>Не удалось загрузить изображение собаки.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 <section>
     <div class="home-start__section">
         <div class="container">
@@ -13,7 +31,9 @@
                     <h4>{{author}}</h4>
                 </div>
                 <div class="col-4 home__btn-col">
-                    <button type="button" class="btn btn-outline-light btn-large start-btn">Services</button>
+                    <button type="button" class="btn btn-outline-light btn-large start-btn" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">ʕ ᵔᴥᵔ ʔ
+                    </button>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import requests
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 import datetime
 from django.shortcuts import render, redirect, get_object_or_404
@@ -16,10 +17,13 @@ from .models import CompanyService, ServiceCategory, Driver, Transport, Order, C
 def index(request):
     service_list = CompanyService.objects.all()
     quote, author = get_random_quote()
+    image_url = get_random_dog_image()
+
     context = {
         'quote': quote,
         'author': author,
-        'service_list': service_list
+        'service_list': service_list,
+        'image_url': image_url,
     }
     return render(request, 'index.html', context=context)
 
@@ -284,3 +288,15 @@ def get_random_quote():
         author = data['author']
         return quote, author
     return None, None
+
+
+def get_random_dog_image():
+    url = 'https://dog.ceo/api/breeds/image/random'
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        image_url = data.get('message', '')
+        return image_url
+    return None
+
+
