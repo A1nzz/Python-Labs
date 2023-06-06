@@ -40,6 +40,8 @@ class Driver(AbstractUser):
     date_of_birth = models.DateField()
     email = models.EmailField()
     phone_number = models.CharField(max_length=50)
+    groups = models.ManyToManyField('auth.Group', related_name='drivers', blank=True)
+
 
     REQUIRED_FIELDS = ['first_name', 'last_name',
                        'email', 'date_of_birth', 'phone_number']
@@ -51,8 +53,6 @@ class Driver(AbstractUser):
         String for representing the MyModelName object (in Admin site etc.)
         """
         return f'{self.first_name} {self.last_name} {self.email}'
-
-
 
 
 class Transport(models.Model):
@@ -85,6 +85,8 @@ class Client(models.Model):
     first_name = models.CharField(max_length=255, blank=False)
 
     last_name = models.CharField(max_length=255, blank=False)
+
+    email = models.EmailField(max_length=255, blank=False, default="")
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

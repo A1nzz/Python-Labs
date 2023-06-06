@@ -5,7 +5,7 @@
 {% if orders_list %}
 <section class="services bg-secondary pt-4">
     <div class="container">
-        <h2 style="margin-left: 2rem; color: white">Transport</h2>
+        <h2 style="margin-left: 2rem; color: white">Orders</h2>
         <div class="services__inner d-flex flex-wrap">
 
             {% for order in orders_list %}
@@ -16,11 +16,17 @@
                     <h5 class="card-title">{{ order.cargo }}</h5>
 
                     <p class="card-text">
+                        Тип груза: {{order.cargo.type}}
+                        <br>
                         Дата: {{order.date}}
                         <br>
-                        Клиент: {{order.client}}
+                        Клиент: {{order.client.first_name}} {{order.client.last_name}} {{order.client.email}}
                         <br>
                         Стоимость: {{order.cost}}
+                        <br>
+                        Водитель: {{order.driver.first_name}} {{order.driver.last_name}}
+                        <br>
+                        Транспорт: {{order.transport}}
                     </p>
 
                 </div>
