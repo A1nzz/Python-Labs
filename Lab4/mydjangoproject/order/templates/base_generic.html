@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
 
-    {% block title %}<title>Local Library</title>{% endblock %}
+    {% block title %}<title>Statham trans</title>{% endblock %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="author" content="Мамченко Кирилл"/>
+    <meta
+            name="description"
+            content="StathamTrans - транспортная компания обеспечивающая доставку груза га просторах стран СНГ"/>
+    <link rel="shortcut icon" href="../../static/images/logo/logo.png"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
@@ -14,102 +18,124 @@
 
     <!-- Добавление дополнительного статического CSS файла -->
     {% load static %}
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="../../static/css/about_us.css">
 </head>
 
 <body>
-<nav class="navbar bg-dark border-bottom border-bottom-dark navbar-expand-lg bg-body-tertiary"
-     data-bs-theme="dark">
-    <a class="navbar-brand" href="{% url 'index' %}">
-        StathamTrans
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'services' %}">Services</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'drivers' %}">Drivers</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'transport' %}">Transport</a>
-            </li>
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'orders' %}">Orders</a>
-            </li>
-            {% endif %}
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'cargos_list' %}">Cargos</a>
-            </li>
-            {% endif %}
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'clients_list' %}">Clients</a>
-            </li>
-            {% endif %}
-        </ul>
+<header>
+    <nav class="navbar bg-dark border-bottom border-bottom-dark navbar-expand-lg bg-body-tertiary"
+         data-bs-theme="dark">
+        <a class="navbar-brand" href="{% url 'index' %}">
+            StathamTrans
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'services' %}">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'drivers' %}">Drivers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'transport' %}">Transport</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'news' %}">News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'faq' %}">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'coupons' %}">Coupons</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'review_list' %}">Reviews</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'orders' %}">Orders</a>
+                    </li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cargos_list' %}">Cargos</a>
+                    </li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'clients_list' %}">Clients</a>
+                    </li>
+                {% endif %}
+            </ul>
 
-        <form class="container-fluid  d-flex justify-content-end align-items-center">
-            {% if user.is_authenticated %}
-            <span style="color: white; margin-right: 10px" id='date'></span>
-            <span style="color: white; margin-right: 10px" id='time'></span>
-            <span style="color: white; margin-right: 10px" id='zone'></span>
-            <span style="color: white; margin-right: 10px" >User: {{ user.get_username }}</span>
-            <a href="{% url 'logout'%}?next={{request.path}}" class="btn btn-outline-secondary" type="button">Выйти</a>
-            {% else %}
-            <a href="{% url 'login'%}?next={{request.path}}" class="btn btn-outline-success me-2"
-               type="button">Войти</a>
-            {% endif %}
+            <form class="container-fluid  d-flex justify-content-end align-items-center">
+                {% if user.is_authenticated %}
+                    <span style="color: white; margin-right: 10px" id='date'></span>
+                    <span style="color: white; margin-right: 10px" id='time'></span>
+                    <span style="color: white; margin-right: 10px" id='zone'></span>
+                    <span style="color: white; margin-right: 10px">User: {{ user.get_username }}</span>
+                    <a href="{% url 'logout' %}?next={{ request.path }}" class="btn btn-outline-secondary"
+                       type="button">Выйти</a>
+                {% else %}
+                    <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-outline-success me-2"
+                       type="button">Войти</a>
+                {% endif %}
 
-        </form>
-    </div>
-</nav>
+            </form>
+        </div>
+    </nav>
+</header>
+<main>
+    {% block content %}{% endblock %}
+</main>
 
-
-{% block content %}{% endblock %}
-
+<footer>
+    ©Оформление сайта. ООО «StathamTrans», 2023
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
- <script>
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        let mm = today.getMonth() + 1; // Months start at 0!
-        let dd = today.getDate();
-        let h = today.getHours();
-        if (h<10)
-            h = '0' + h;
-        let min = today.getMinutes();
-        if (min < 10)
-            min = '0' + min;
-        let sec = today.getSeconds();
-        if (sec < 10)
-            sec = '0' + sec;
+<script>
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    let mm = today.getMonth() + 1; // Months start at 0!
+    let dd = today.getDate();
+    let h = today.getHours();
+    if (h < 10)
+        h = '0' + h;
+    let min = today.getMinutes();
+    if (min < 10)
+        min = '0' + min;
+    let sec = today.getSeconds();
+    if (sec < 10)
+        sec = '0' + sec;
 
-        if (dd < 10) dd = '0' + dd;
-        if (mm < 10) mm = '0' + mm;
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
 
-        let formattedToday = dd + '/' + mm + '/' + yyyy;
-        let time = h+":"+min+":"+sec;
-        let tz = -(new Date().getTimezoneOffset() / 60);
-        if(tz>0){
-            tz = "+" + tz;
-        }
-        tz = "UTC" + tz;
-        document.getElementById('date').innerHTML=formattedToday;
-        document.getElementById('time').innerHTML=time;
-        document.getElementById('zone').innerHTML=tz;
-        </script>
+    let formattedToday = dd + '/' + mm + '/' + yyyy;
+    let time = h + ":" + min + ":" + sec;
+    let tz = -(new Date().getTimezoneOffset() / 60);
+    if (tz > 0) {
+        tz = "+" + tz;
+    }
+    tz = "UTC" + tz;
+    document.getElementById('date').innerHTML = formattedToday;
+    document.getElementById('time').innerHTML = time;
+    document.getElementById('zone').innerHTML = tz;
+</script>
 </body>
 
 </html>

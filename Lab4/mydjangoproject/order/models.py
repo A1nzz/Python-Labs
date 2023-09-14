@@ -1,5 +1,4 @@
 from datetime import date
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse  # Used to generate URLs by reversing the URL patterns
@@ -159,3 +158,39 @@ class CompanyService(models.Model):
         return f'{self.name}'
 
 
+class Post(models.Model):
+    name = models.CharField(max_length=255, blank=False)
+
+    short_description = models.CharField(max_length=255, blank=False)
+
+    description = models.CharField(max_length=2550, blank=False)
+
+    image = models.ImageField(upload_to='order/static/images/posts/')
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+class Faq(models.Model):
+    question = models.CharField(max_length=255, blank=False)
+
+    date = models.DateField()
+
+    response = models.TextField(blank=False)
+
+    def __str__(self):
+        return f'{self.question}'
+
+
+class Coupon(models.Model):
+    name = models.CharField(max_length=255, blank=False)
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+class Review(models.Model):
+    client = models.ForeignKey('Client', on_delete=models.CASCADE)
+    rating = models.IntegerField()
+    text = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)

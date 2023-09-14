@@ -25,6 +25,44 @@
     color: #fff;
 }
 
+.add__section {
+    position: relative;
+
+    background: linear-gradient( rgba(255, 255, 255, 0.0005), rgba(0, 0, 0, 1) ), url("../images/1500x500.jpeg") no-repeat center center;
+    background-size: cover;
+    padding: 200px 0;
+}
+
+.partners__section {
+    padding: 25px 0;
+}
+
+.partners__title {
+    margin-bottom: 10px;
+}
+
+.partners__list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.partners-list__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-decoration: none;
+    color: #000;
+}
+
+.partners-item__img {
+    height: 50px;
+}
+
+
 .services{
     background-color: #000;
 }
+
+
+

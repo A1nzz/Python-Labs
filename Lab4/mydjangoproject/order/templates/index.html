@@ -1,71 +1,118 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Random dog</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                {% if image_url %}
-                <img src="{{ image_url }}" alt="Random Dog" style="width: 100%; height: auto;">
-                {% else %}
-                <p>Не удалось загрузить изображение собаки.</p>
-                {% endif %}
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Random dog</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% if image_url %}
+                        <img src="{{ image_url }}" alt="Random Dog" style="width: 100%; height: auto;">
+                    {% else %}
+                        <p>Не удалось загрузить изображение собаки.</p>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
-</div>
-<section>
-    <div class="home-start__section">
+    <section>
+        <div class="home-start__section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-8 start-text">
+                        <h1>StathamTrans</h1>
+                        <q>
+                            {{ quote }}
+                        </q>
+                        <h4>{{ author }}</h4>
+                    </div>
+                    <div class="col-4 home__btn-col">
+                        <button type="button" class="btn btn-outline-light btn-large start-btn" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">ʕ ᵔᴥᵔ ʔ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="last-post__section">
         <div class="container">
-            <div class="row">
-                <div class="col-8 start-text">
-                    <h1>StathamTrans</h1>
-                    <p>
-                        {{quote}}
-                    </p>
-                    <h4>{{author}}</h4>
-                </div>
-                <div class="col-4 home__btn-col">
-                    <button type="button" class="btn btn-outline-light btn-large start-btn" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">ʕ ᵔᴥᵔ ʔ
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-{% if service_list %}
-
-<section class="services bg-secondary pt-4">
-    <div class="container">
-        <h2 style="margin-left: 2rem; color: white">Services</h2>
-        <div class="services__inner d-flex flex-wrap">
-
-            {% for service in service_list %}
-
+            <h2 class="last-post__title">Last Post</h2>
             <div class="card" style="width: 18rem; margin: 2rem">
-                <img src="../static/images/1500x500.jpeg" class="card-img-top" alt="...">
+                <img src="{{ latest_post.image.url }}" class="card-img-top" alt="post">
                 <div class="card-body">
-                    <h5 class="card-title">{{ service.name }}</h5>
+                    <h5 class="card-title">{{ latest_post.name }}</h5>
 
                     <p class="card-text">
-                        Some quick example text to build on the card title and make up the bulk of the
-                        card's content.
+                        {{ latest_post.short_description }}
                     </p>
                 </div>
             </div>
-            {% endfor %}
-
         </div>
-    </div>
-</section>
-{% else %}
-<p>There are no services.</p>
-{% endif %}
+
+    </section>
+
+    <section>
+        <div class="add__section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-8 start-text">
+                        <h1>Addvertistment</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners__section">
+        <div class="container">
+            <h2 class="partners__title">Наши партнеры</h2>
+            <div class="partners__list">
+                <a class="partners-list__item" href="#">
+                    <img src="../static/images/partners-logos/mers-logo.png" alt="mercedes" class="partners-item__img">
+                    <div class="partners-item__subtitle">Mercedes</div>
+                </a>
+                <a class="partners-list__item" href="#">
+                    <img src="../static/images/partners-logos/bmw-logo.png" alt="bmw" class="partners-item__img">
+                    <div class="partners-item__subtitle">BMW</div>
+                </a>
+                <a class="partners-list__item" href="#">
+                    <img src="../static/images/partners-logos/man-logo.jpg" alt="mercedes" class="partners-item__img">
+                    <div class="partners-item__subtitle">Mercedes</div>
+                </a>
+            </div>
+        </div>
+    </section>
+    {% if service_list %}
+        <section class="services bg-secondary pt-4">
+            <div class="container">
+                <h2 style="margin-left: 2rem; color: white">Services</h2>
+                <div class="services__inner d-flex flex-wrap">
+
+                    {% for service in service_list %}
+
+                        <div class="card" style="width: 18rem; margin: 2rem">
+                            <img src="../static/images/1500x500.jpeg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ service.name }}</h5>
+                                <p class="card-text">
+                                    Some quick example text to build on the card title and make up the bulk of the
+                                    card's content.
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </section>
+    {% else %}
+        <p>There are no services.</p>
+    {% endif %}
 {% endblock %}
 

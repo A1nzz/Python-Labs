@@ -9,23 +9,49 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required, permission_required
 
 
-from .forms import TransportForm, CargoForm, ClientForm, ServiceForm
+from .forms import TransportForm, CargoForm, ClientForm, ServiceForm, ReviewForm
 from .models import CompanyService, ServiceCategory, Driver, Transport, Order, Cargo, TransportType, BodyType, Client,\
-    CargoType
+    CargoType, Post, Faq, Coupon, Review
 
 
 def index(request):
     service_list = CompanyService.objects.all()
     quote, author = get_random_quote()
     image_url = get_random_dog_image()
-
+    posts = Post.objects.all()
+    latest_post = posts.latest('id')
     context = {
         'quote': quote,
         'author': author,
         'service_list': service_list,
         'image_url': image_url,
+        'latest_post': latest_post,
     }
     return render(request, 'index.html', context=context)
+
+
+def about_us(request):
+    return render(request, 'aboutus/aboutus.html')
+
+
+def news(request):
+    lst = Post.objects.all()
+    return render(request, 'news/news.html', context={'news_list': lst})
+
+
+def news_detail(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    return render(request, 'news/news_detail.html', {'post': post})
+
+
+def faq(request):
+    lst = Faq.objects.all()
+    return render(request, 'FAQ/faq.html', context={'faq_list': lst})
+
+
+def coupons(request):
+    lst = Coupon.objects.all()
+    return render(request, 'coupons/coupons.html', context={'coupons_list': lst})
 
 
 # return only drivers
@@ -300,3 +326,17 @@ def get_random_dog_image():
     return None
 
 
+def review_list(request):
+    reviews = Review.objects.order_by('-date')
+    return render(request, 'reviews/reviews.html', {'reviews': reviews})
+
+
+def add_review(request):
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('review_list')
+    else:
+        form = ReviewForm()
+    return render(request, 'reviews/add_review.html', {'form': form})

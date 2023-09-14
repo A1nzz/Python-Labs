@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <section class="news__section">
+        <div class="container">
+            <h1 class="news__title">News</h1>
+            {% if news_list %}
+                <div class="news__list d-flex flex-wrap">
+                    {% for news_item in news_list %}
+                        <article class="card" style="width: 18rem; margin: 2rem">
+                            <img src="{{ news_item.image.url }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ news_item.name }}</h5>
+                                <p class="card-text">
+                                    {{ news_item.short_description }}
+                                </p>
+                                 <a href="{% url 'news_detail' news_item.id %}">Читать далее</a>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

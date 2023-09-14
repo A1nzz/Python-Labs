@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <section class="reviews__section">
+        <div class="container">
+            <h1>Список отзывов</h1>
+
+            {% for review in reviews %}
+                <article class="review">
+                    <h3>{{ review.client }}</h3>
+                    <p>Оценка: {{ review.rating }}</p>
+                    <p>{{ review.text }}</p>
+                    <p>Дата: {{ review.date }}</p>
+                </article>
+                {% empty %}
+                <p>Нет отзывов.</p>
+            {% endfor %}
+
+            <a href="{% url 'add_review' %}">Добавить отзыв</a>
+        </div>
+    </section>
+{% endblock %}

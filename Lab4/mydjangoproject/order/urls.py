@@ -28,4 +28,14 @@ urlpatterns = [
     path('services/create', views.create_service, name='create-service'),
     path('services/edit/<int:id>/', views.edit_service, name='edit_service'),
     path('services/delete/<int:id>/', views.delete_service, name='delete_service'),
+
+    path('about_us/', views.about_us, name='about_us'),
+    path('news/', views.news, name='news'),
+    path('news/<int:post_id>/', views.news_detail, name='news_detail'),
+
+    path('faq/', views.faq, name='faq'),
+    path('coupons/', views.coupons, name='coupons'),
+
+    path('reviews/', views.review_list, name='review_list'),
+    path('reviews/add/', views.add_review, name='add_review'),
 ]

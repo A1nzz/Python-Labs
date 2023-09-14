@@ -13,9 +13,10 @@
                 <img src="../../static/images/rostovaja-figura-dzhejson-stejtem-jason-statham-1800-mm..jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ driver.first_name}} {{driver.last_name}}</h5>
-                    <p class="card-text">
-                       Age: {{driver.age}}
-                    </p>
+                    <pre class="card-text">Age: {{driver.age}}
+Email: {{ driver.email }}
+Phone Number: {{ driver.phone_number }}
+                    </pre>
                 </div>
             </div>
             {% endfor %}

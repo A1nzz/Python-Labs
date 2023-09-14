@@ -1,0 +1,18 @@
+<h1>Добавить отзыв</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.email.errors }}
+    <label for="{{ form.email.id_for_label }}">Email:</label>
+    {{ form.email }}
+    <br>
+    {{ form.rating.errors }}
+    <label for="{{ form.rating.id_for_label }}">Оценка:</label>
+    {{ form.rating }}
+    <br>
+    {{ form.text.errors }}
+    <label for="{{ form.text.id_for_label }}">Текст:</label>
+    {{ form.text }}
+    <br>
+    <button type="submit">Отправить</button>
+</form>

@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <section class="faq__section">
+        <div class="container">
+            <h1 class="faq__title">FAQ</h1>
+
+
+            {% if faq_list %}
+                <div class="faq__list d-flex flex-wrap">
+                    {% for faq_item in faq_list %}
+                        <details>
+                            <summary>{{ faq_item.question }}</summary>
+                            {{ faq_item.response }}<br>
+                            <time datetime="{{ faq_item.date }}">{{ faq_item.date }}</time>
+                        </details>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

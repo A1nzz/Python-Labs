@@ -12,7 +12,7 @@ from django.core.exceptions import ValidationError
 
 from order.models import Transport, TransportType, BodyType, \
     Cargo, CargoType, Order, ServiceCategory, CompanyService,\
-    Driver, Client
+    Driver, Client, Post, Faq, Coupon
 
 
 class DriverCreationForm(UserCreationForm):
@@ -149,5 +149,17 @@ class ServiceCategoryAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('date', 'client', 'driver', 'transport', 'cost', 'cargo', 'service')
 
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ['name']
+
+@admin.register(Faq)
+class FaqAdmin(admin.ModelAdmin):
+    list_display = ['question']
+
+
+@admin.register(Coupon)
+class CouponAdmin(admin.ModelAdmin):
+    list_display = ['name']
 
 admin.site.register(Client)
