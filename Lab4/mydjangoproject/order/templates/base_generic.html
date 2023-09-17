@@ -69,6 +69,11 @@
                 {% endif %}
                 {% if user.is_authenticated %}
                     <li class="nav-item">
+                        <a class="nav-link" href="/stats/">Stats</a>
+                    </li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'cargos_list' %}">Cargos</a>
                     </li>
                 {% endif %}

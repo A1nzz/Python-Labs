@@ -29,6 +29,7 @@
                             {{ quote }}
                         </q>
                         <h4>{{ author }}</h4>
+                        <a href="#services">Наши услуги ↓</a>
                     </div>
                     <div class="col-4 home__btn-col">
                         <button type="button" class="btn btn-outline-light btn-large start-btn" data-bs-toggle="modal"
@@ -89,7 +90,7 @@
         </div>
     </section>
     {% if service_list %}
-        <section class="services bg-secondary pt-4">
+        <section class="services bg-secondary pt-4" id="services">
             <div class="container">
                 <h2 style="margin-left: 2rem; color: white">Services</h2>
                 <div class="services__inner d-flex flex-wrap">
