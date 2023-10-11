@@ -1,0 +1,174 @@
+/* Основные стили для заголовка */
+.header {
+    background-color: #000;
+    padding: 10px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.header-brand {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    vertical-align: center;
+}
+
+/* Стили для навигационной панели */
+.navbar {
+}
+
+.navbar-menu {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.nav-item {
+    margin-right: 10px;
+    padding: 10px 5px;
+
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    letter-spacing: 2px;
+    position: relative;
+    font-size: 17px;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: all .2s ease-in;
+}
+
+.nav-link:before,
+.nav-link:after {
+    content: "";
+    position: absolute;
+    height: 4px;
+    top: auto;
+    right: 50%;
+    bottom: -5px;
+    left: 50%;
+    background: #fff;
+    transition: .4s;
+}
+
+.nav-link.active {
+    font-weight: bold;
+}
+
+.nav-link:hover:before {
+    left: 0;
+}
+
+.nav-link:hover:after {
+    right: 0;
+}
+
+/* Стили для формы */
+.header-form {
+
+}
+
+.btn-outline-secondary {
+    color: white;
+    border: 1px solid white;
+}
+
+.btn-outline-secondary:hover {
+    color: #000;
+    background-color: #fff;
+}
+
+.user-info__list {
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background: #000;
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+}
+
+.user-info__list.active {
+    transform: translateX(0);
+}
+
+.user-info__item {
+    margin-bottom: 10px;
+}
+
+.auth-pages__list {
+    display: flex;
+    padding: 10px;
+}
+
+aside {
+    background-color: #000;
+}
+
+.user-toggle {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.user-toggle span {
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: white;
+    position: absolute;
+    transition: transform 0.3s ease;
+    border-radius: 2px;
+
+}
+
+.user-toggle span::before,
+.user-toggle span::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background-color: #fff;
+    position: absolute;
+    transition: transform 0.3s ease;
+}
+
+.user-toggle span::before {
+    top: -10px;
+}
+
+.user-toggle span::after {
+    top: 10px;
+}
+
+.user-toggle.active span {
+  background-color: transparent;
+}
+
+.user-toggle.active span::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.user-toggle.active span::after {
+  transform: rotate(-45deg);
+  top: 0;
+}

@@ -1,11 +1,81 @@
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+    padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    font-family: 'SansSerif', sans-serif;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+    list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+    margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+
 .home-start__section {
     position: relative;
 
-    background: linear-gradient( rgba(255, 255, 255, 0.0005), rgba(0, 0, 0, 1) ), url("../images/1500x500.jpeg") no-repeat center center;
+    background: linear-gradient(rgba(255, 255, 255, 0.0005), rgba(0, 0, 0, 1)), url("../images/1500x500.jpeg") no-repeat center center;
     background-size: cover;
     padding: 200px 0;
 }
-
 
 
 .home__btn-col {
@@ -28,7 +98,7 @@
 .add__section {
     position: relative;
 
-    background: linear-gradient( rgba(255, 255, 255, 0.0005), rgba(0, 0, 0, 1) ), url("../images/1500x500.jpeg") no-repeat center center;
+    background: linear-gradient(rgba(255, 255, 255, 0.0005), rgba(0, 0, 0, 1)), url("../images/1500x500.jpeg") no-repeat center center;
     background-size: cover;
     padding: 200px 0;
 }
@@ -60,9 +130,69 @@
 }
 
 
-.services{
+.services {
     background-color: #000;
 }
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+.transparent-btn {
+    border: 2px #000 solid;
+    color: #000;
+    background-color: transparent;
+    transition: all .2s ease-in;
+}
+
+.transparent-btn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.btn-warning-outline {
+    border: 2px #ffa200 solid;
+    color: #ffa200;
+    background-color: transparent;
+    transition: all .2s ease-in;
+}
+
+.btn-warning-outline:hover {
+    background-color: #ffa200;
+    color: #fff;
+}
+
+.btn-danger-outline {
+    border: 2px #ff0000 solid;
+    color: #ff0000;
+    background-color: transparent;
+    transition: all .2s ease-in;
+}
+
+.btn-danger-outline:hover {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+.d-flex{
+    display: flex;
+}
+.justify-content-between{
+    justify-content: space-between;
+}
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
 
 
 

@@ -1,0 +1,41 @@
+.services {
+    background-color: #fff;
+}
+
+.services__inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.card {
+    border-radius: 12px;
+    border: #000 1px solid;
+    overflow: hidden;
+    margin: 0 20px;
+
+}
+
+.card-img-top {
+
+}
+.card-cost {
+    font-size: 16px;
+    font-weight: 700;
+    font-style: italic;
+    margin: 10px 0;
+}
+.card-body {
+    padding: 14px 16px;
+}
+
+.card-title {
+    margin-bottom: 10px;
+    font-size: 20px;    
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+}
+
+.service-btn {
+    margin-bottom: 10px;
+}
+

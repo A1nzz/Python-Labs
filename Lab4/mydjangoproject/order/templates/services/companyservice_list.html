@@ -96,14 +96,14 @@
 
 </div>
 {% if service_list %}
-<section class="services bg-secondary pt-4">
+<section class="services">
     <div class="container">
         <h2 style="margin-left: 2rem; color: white">Services</h2>
-        <div class="services__inner d-flex flex-wrap">
+        <div class="services__inner">
 
             {% for service in service_list %}
 
-            <div class="card" style="width: 18rem; margin: 2rem">
+            <div class="card">
                 <img src="../../static/images/1500x500.jpeg" class="card-img-top" alt="">
                 <div class="card-body">
                     <h5 class="card-title">{{ service.name }}</h5>
@@ -112,15 +112,15 @@
                         Some quick example text to build on the card title and make up the bulk of the
                         card's content.
                     </p>
-                    <div class="mb-3">
+                    <div class="card-cost">
                         <span>Cost: {{service.cost}}</span>
                     </div>
-                    <a href="#" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Create order</a>
+                    <a href="#" class="btn transparent-btn service-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Create order</a>
 
                     {% if user.is_staff %}
-                    <div class="d-flex justify-content-between p-2">
-                        <a href="{% url 'edit_service' service.id %}" class="btn btn-warning">Edit</a>
-                        <a href="{% url 'delete_service' service.id %}" class="btn btn-danger">Remove</a>
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'edit_service' service.id %}" class="btn btn-warning-outline">Edit</a>
+                        <a href="{% url 'delete_service' service.id %}" class="btn btn-danger-outline">Remove</a>
                     </div>
                     {% endif %}
                 </div>
