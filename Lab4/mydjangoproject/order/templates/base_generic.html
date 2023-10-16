@@ -13,10 +13,15 @@
 
     <!-- Добавление дополнительного статического CSS файла -->
     {% load static %}
-    <link rel="stylesheet" href="../../static/css/style.css">
-    <link rel="stylesheet" href="../../static/css/about_us.css">
-    <link rel="stylesheet" href="../../static/css/header.css">
-    <link rel="stylesheet" href="../../static/css/services.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about_us.css' %}">
+    <link rel="stylesheet" href="{% static 'css/services.css' %}">
+    <link rel="stylesheet" href="{% static 'css/faq.css' %}">
+    <link rel="stylesheet" href="{% static 'css/drivers.css' %}">
+    <link rel="stylesheet" href="{% static 'css/transport.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reviews.css' %}">
+    <link rel="stylesheet" href="{% static 'css/news.css' %}">
 
     <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,110 +31,159 @@
 </head>
 
 <body>
-<header class="header">
-    <a class="header-brand" href="{% url 'index' %}">
-        StathamTrans
-    </a>
-    <nav class="navbar">
-        <ul class=" navbar-menu">
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'index' %}">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'services' %}">Services</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'drivers' %}">Drivers</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'transport' %}">Transport</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'news' %}">News</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'faq' %}">FAQ</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'coupons' %}">Coupons</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'review_list' %}">Reviews</a>
-            </li>
-        </ul>
-    </nav>
-    <form class="header-form">
+<div class="wrapper">
+    <header class="header">
+        <a class="header-brand" href="{% url 'index' %}">
+            StathamTrans
+        </a>
+        <nav class="navbar">
+            <ul class="navbar-menu">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'services' %}">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'drivers' %}">Drivers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'transport' %}">Transport</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'news' %}">News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'faq' %}">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'coupons' %}">Coupons</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'review_list' %}">Reviews</a>
+                </li>
+            </ul>
+        </nav>
+        <form class="header-form">
+            {% if user.is_authenticated %}
+                <button class="user-toggle" type="button">
+                    <span></span>
+                </button>
+
+                <ul class="user-info__list" id="userInfo">
+                    <li class="user-info__item">
+                        <span style="color: white; margin-right: 10px" id='date'></span>
+                    </li>
+                    <li class="user-info__item">
+                        <span style="color: white; margin-right: 10px" id='time'></span>
+                    </li>
+                    <li class="user-info__item">
+                        <span style="color: white; margin-right: 10px" id='zone'></span>
+                    </li>
+                    <li class="user-info__item">
+                        <span style="color: white; margin-right: 10px">User: {{ user.get_username }}</span>
+                    </li>
+
+                    <li class="user-info__item burger-item">
+                        <a class="nav-link" aria-current="page" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="user-info__item burger-item">
+                        <a class="nav-link" href="{% url 'services' %}">Services</a>
+                    </li>
+                    <li class="user-info__item burger-item">
+                        <a class="nav-link" href="{% url 'drivers' %}">Drivers</a>
+                    </li>
+                    <li class="user-info__item burger-item">
+                        <a class="nav-link" href="{% url 'transport' %}">Transport</a>
+                    </li>
+                    <li class="user-info__item burger-item">
+                        <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
+                    </li>
+                    <li class="user-info__item burger-item">
+                        <a class="nav-link" href="{% url 'news' %}">News</a>
+                    </li>
+                    <li class="user-info__item burger-item">
+                        <a class="nav-link" href="{% url 'faq' %}">FAQ</a>
+                    </li>
+                    <li class="user-info__item burger-item">
+                        <a class="nav-link" href="{% url 'coupons' %}">Coupons</a>
+                    </li>
+                    <li class="user-info__item burger-item">
+                        <a class="nav-link" href="{% url 'review_list' %}">Reviews</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+                        <li class="user-info__item burger-item">
+                            <a class="nav-link" href="{% url 'orders' %}">Orders</a>
+                        </li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <li class="user-info__item burger-item">
+                            <a class="nav-link" href="/stats/">Stats</a>
+                        </li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <li class="user-info__item burger-item">
+                            <a class="nav-link" href="{% url 'cargos_list' %}">Cargos</a>
+                        </li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <li class="user-info__item burger-item">
+                            <a class="nav-link" href="{% url 'clients_list' %}">Clients</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="user-info__item">
+                        <a href="{% url 'logout' %}?next={{ request.path }}" class="btn btn-outline-secondary"
+                           type="button" accesskey="q">LogOut</a>
+                    </li>
+                </ul>
+
+            {% else %}
+                <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-outline-secondary"
+                   type="button">LogIn</a>
+            {% endif %}
+
+        </form>
+    </header>
+    <main>
         {% if user.is_authenticated %}
-            <button class="user-toggle" type="button">
-                <span></span>
-            </button>
-            <ul class="user-info__list" id="userInfo">
-                <li class="user-info__item">
-                    <span style="color: white; margin-right: 10px" id='date'></span>
-                </li>
-                <li class="user-info__item">
-                    <span style="color: white; margin-right: 10px" id='time'></span>
-                </li>
-                <li class="user-info__item">
-                    <span style="color: white; margin-right: 10px" id='zone'></span>
-                </li>
-                <li class="user-info__item">
-                    <span style="color: white; margin-right: 10px">User: {{ user.get_username }}</span>
-                </li>
-                <li class="user-info__item">
-                    <a href="{% url 'logout' %}?next={{ request.path }}" class="btn btn-outline-secondary"
-                       type="button" accesskey="q">LogOut</a>
-                </li>
-            </ul>
+            <aside>
 
-        {% else %}
-            <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-outline-secondary"
-               type="button">LogIn</a>
+                <ul class="auth-pages__list" id="authPages">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'orders' %}">Orders</a>
+                        </li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/stats/">Stats</a>
+                        </li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'cargos_list' %}">Cargos</a>
+                        </li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'clients_list' %}">Clients</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </aside>
         {% endif %}
+        {% block content %}{% endblock %}
+    </main>
 
-    </form>
-</header>
-<main>
-    {% if user.is_authenticated %}
-        <aside>
-
-            <ul class="auth-pages__list" id="authPages">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'orders' %}">Orders</a>
-                    </li>
-                {% endif %}
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/stats/">Stats</a>
-                    </li>
-                {% endif %}
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'cargos_list' %}">Cargos</a>
-                    </li>
-                {% endif %}
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'clients_list' %}">Clients</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </aside>
-    {% endif %}
-    {% block content %}{% endblock %}
-</main>
-
-<footer>
-    ©Оформление сайта. ООО «StathamTrans», 2023
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
+    <footer>
+        ©Оформление сайта. ООО «StathamTrans», 2023
+    </footer>
+</div>
 <script>
     const today = new Date();
     const yyyy = today.getFullYear();
@@ -167,10 +221,44 @@
 
     let menuBtn = document.querySelector('.user-toggle');
     let menu = document.querySelector('.user-info__list');
+    let burgerMenu = document.querySelector('#burger-menu');
     menuBtn.addEventListener('click', function () {
         menu.classList.toggle('active');
         menuBtn.classList.toggle('active');
+        burgerMenu.classList.toggle('active');
     })
+
+
+    // Получаем ссылки на кнопку открытия модального окна и само модальное окно
+    const openModalButton = document.getElementById('openModalBtn');
+    const modal = document.getElementById('exampleModal');
+    const closeModalButton = document.getElementById('btn-close-modal');
+
+    // Функция открытия модального окна
+    function openModal() {
+        modal.style.display = 'block';
+    }
+
+    // Функция закрытия модального окна
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    // Назначаем обработчики событий на кнопку открытия и закрытия модального окна
+    openModalButton.addEventListener('click', openModal);
+    closeModalButton.addEventListener('click', closeModal);
+    modal.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    // обработчик события на нажатие клавиши Escape для закрытия модального окна
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    });
 </script>
 </body>
 

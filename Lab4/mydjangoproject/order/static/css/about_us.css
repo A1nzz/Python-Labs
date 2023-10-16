@@ -2,3 +2,158 @@
     margin: 70px 30px;
 }
 
+.info__title {
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.video__section {
+    margin-bottom: 20px;
+}
+
+.logo__section {
+    margin: 30px 0;
+}
+
+.logo__section .container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-img__wrapper {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-img__wrapper img {
+    display: block;
+}
+
+.logo__title {
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-decoration: underline;
+}
+
+
+.audio__section {
+    margin: 20px 0;
+}
+
+.audio__section .container {
+    text-align: center;
+}
+
+.audio__title {
+    margin-bottom: 10px;
+}
+
+.video__section .container {
+    text-align: center;
+}
+
+@media screen and (max-width: 650px) {
+    .video__section iframe {
+        width: 300px;
+    }
+}
+
+.video__title {
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+
+.history__section {
+    padding: 0 30px;
+    margin: 30px 0;
+}
+
+.history__title {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.history__item {
+    margin-bottom: 20px;
+}
+
+.history-item__title {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.certificate__section {
+    margin: 40px 0;
+}
+
+/* Стили для контейнера сертификата */
+.certificate-container {
+    padding: 20px 30px;
+    width: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0.0005), rgba(0, 0, 0, 1)), url("../images/bg-sert.jpeg") no-repeat center center;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #ffffff;
+    z-index: -1;
+}
+
+/* Стили для заголовка сертификата */
+.certificate-title {
+    font-size: 32px;
+    margin-top: 40px;
+    text-decoration: underline;
+}
+
+/* Стили для основного текста сертификата */
+.certificate-text {
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+/* Стили для раздела "Подтверждение Сертификации" */
+.certificate-confirmation {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+/* Стили для раздела "Описание Сертификата" */
+.certificate-description {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.certificate-description ul {
+    list-style: none;
+}
+
+/* Стили для даты выдачи и срока действия */
+.certificate-dates {
+    font-size: 18px;
+    margin-bottom: 30px;
+    -ms-text-align-last: right;
+    text-align-last: right;
+}
+
+.certificate-dates p:nth-child(2) {
+    margin-bottom: 15px;
+}
+
+/* Стили для подписи и печати уполномоченного лица */
+.certificate-signature {
+    font-size: 20px;
+    margin: 30px 0;
+    display: flex;
+    justify-content: space-between;
+}

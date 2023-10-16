@@ -7,7 +7,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Random dog</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Close</button>
                 </div>
                 <div class="modal-body">
                     {% if image_url %}
@@ -23,11 +23,19 @@
         <div class="home-start__section">
             <div class="container">
                 <div class="row">
-                    <div class="col-8 start-text">
+                    <div class="start-text">
                         <h1>StathamTrans</h1>
-                        <q>
+                        <blockquote class="russian">
+                            Это цитата на русском языке.
                             {{ quote }}
-                        </q>
+                        </blockquote>
+                        <br>
+
+                        <blockquote class="english">
+                            This is a quote in English.
+                            {{ quote }}
+                        </blockquote>
+                        <br>
                         <h4>{{ author }}</h4>
                         <a href="#services">Наши услуги ↓</a>
                     </div>
@@ -44,31 +52,37 @@
     <section class="last-post__section">
         <div class="container">
             <h2 class="last-post__title">Last Post</h2>
-            <div class="card" style="width: 18rem; margin: 2rem">
-                <img src="{{ latest_post.image.url }}" class="card-img-top" alt="post">
-                <div class="card-body">
-                    <h5 class="card-title">{{ latest_post.name }}</h5>
+            <div class="last-post__wrapper">
+                <div class="card last-post__item" style="width: 18rem; margin: 2rem">
+                    <img src="{{ latest_post.image.url }}" class="card-img-top" alt="post">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ latest_post.name }}</h5>
 
-                    <p class="card-text">
-                        {{ latest_post.short_description }}
-                    </p>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    <section>
-        <div class="add__section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-8 start-text">
-                        <h1>Addvertistment</h1>
+                        <p class="card-text">
+                            {{ latest_post.short_description }}
+                        </p>
                     </div>
                 </div>
             </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="add__section">
+        <div class="container">
+            <div class="row">
+                <div class="add-text">
+                    <h1>Addvertistment</h1>
+                </div>
+                <div class="add-subtext">
+                    <h3>Addvertistment subtext</h3>
+                </div>
+            </div>
         </div>
     </section>
+
 
     <section class="partners__section">
         <div class="container">

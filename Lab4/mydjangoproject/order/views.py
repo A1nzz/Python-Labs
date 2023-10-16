@@ -306,6 +306,8 @@ def delete_service(request, id):
 
 
 def get_random_quote():
+    return None, None
+
     url = 'https://favqs.com/api/qotd'
     response = requests.get(url)
     if response.status_code == 200:
@@ -317,6 +319,7 @@ def get_random_quote():
 
 
 def get_random_dog_image():
+    return None
     url = 'https://dog.ceo/api/breeds/image/random'
     response = requests.get(url)
     if response.status_code == 200:

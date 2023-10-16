@@ -9,17 +9,18 @@
                 <div class="services__inner d-flex flex-wrap">
 
                     {% for driver in drivers_list %}
-                        <div class="card" style="width: 18rem; margin: 2rem" itemtype="https://schema.org/Person">
+                        <div class="card" itemtype="https://schema.org/Person">
                             <img src="../../static/images/rostovaja-figura-dzhejson-stejtem-jason-statham-1800-mm..jpg"
-                                 class="card-img-top" alt="...">
+                                 class="card-img-top driver__img" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title"
                                     itemprop="name">{{ driver.first_name }} {{ driver.last_name }}</h5>
-                                <pre class="card-text">
-<span itemprop="age">Age: {{ driver.age }}</span>
-<b itemprop="email">Email: {{ driver.email }}</b>
-<strong itemprop="telephone"><a href="{{ driver.phone_number }}">Phone Number: {{ driver.phone_number }}</a></strong>
-                    </pre>
+                                <div class="card-text driver__info">
+                                    <span itemprop="age">Age: {{ driver.age }}</span>
+                                    <b itemprop="email">Email: {{ driver.email }}</b>
+                                    <strong itemprop="telephone"><a href="{{ driver.phone_number }}">Phone
+                                        Number: {{ driver.phone_number }}</a></strong>
+                                </div>
                             </div>
                         </div>
                     {% endfor %}

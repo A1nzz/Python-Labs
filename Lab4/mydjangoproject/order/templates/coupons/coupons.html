@@ -4,13 +4,13 @@
     <section class="coupons__section">
         <div class="container">
             {% if coupons_list %}
-                <div class="coupons__list d-flex flex-wrap">
+                <ul class="coupons__list d-flex flex-wrap">
                     {% for coupon_item in coupons_list %}
-                        <div class="coupon__item m-3">
+                        <li class="coupon__item">
                             <h2 class="coupon-item__title">{{ coupon_item.name }}</h2>
-                        </div>
+                        </li>
                     {% endfor %}
-                </div>
+                </ul>
             {% endif %}
         </div>
     </section>

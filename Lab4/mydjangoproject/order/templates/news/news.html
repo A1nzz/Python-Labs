@@ -7,14 +7,14 @@
             {% if news_list %}
                 <div class="news__list d-flex flex-wrap">
                     {% for news_item in news_list %}
-                        <article class="card" style="width: 18rem; margin: 2rem">
+                        <article class="card news__item">
                             <img src="{{ news_item.image.url }}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{ news_item.name }}</h5>
-                                <p class="card-text">
+                                <p class="card-text news-text">
                                     {{ news_item.short_description }}
                                 </p>
-                                 <a href="{% url 'news_detail' news_item.id %}">Читать далее</a>
+                                 <a class="a_link" href="{% url 'news_detail' news_item.id %}">Читать далее</a>
                             </div>
                         </article>
                     {% endfor %}

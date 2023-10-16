@@ -69,12 +69,54 @@ select {
 }
 
 
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(221, 221, 221, 0.8)), url("../images/bg.jpg");
+    background-size: cover;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+main {
+    flex: 1 0 auto;
+    margin-top: 60px;
+}
+
+button[type="button"] {
+    cursor: pointer;
+}
+
+footer {
+    font-size: 10px;
+    flex: 0 0 auto;
+    background-color: #000000;
+    color: #fff;
+    text-align: center;
+    padding: 12px 0;
+}
+
 .home-start__section {
     position: relative;
 
     background: linear-gradient(rgba(255, 255, 255, 0.0005), rgba(0, 0, 0, 1)), url("../images/1500x500.jpeg") no-repeat center center;
     background-size: cover;
     padding: 200px 0;
+    margin-bottom: 30px;
 }
 
 
@@ -108,21 +150,31 @@ select {
 }
 
 .partners__title {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .partners__list {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .partners-list__item {
+    border: #000 1px solid;
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     text-decoration: none;
     color: #000;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Добавление тени */
+    transition: all .2s ease-in;
+}
+
+.partners-list__item:hover {
+    scale: 1.1;
 }
 
 .partners-item__img {
@@ -139,6 +191,7 @@ select {
     padding: 10px 20px;
     border-radius: 12px;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .transparent-btn {
@@ -177,22 +230,337 @@ select {
     color: #fff;
 }
 
-.d-flex{
+.d-flex {
     display: flex;
 }
-.justify-content-between{
+
+.justify-content-between {
     justify-content: space-between;
 }
 
 .container {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.card {
+    border-radius: 12px;
+    border: #000 1px solid;
+    overflow: hidden;
+    margin: 10px 20px;
+}
+
+.card-cost {
+    font-size: 16px;
+    font-weight: 700;
+    font-style: italic;
+    margin: 10px 0;
+}
+
+.card-body {
+    padding: 14px 16px;
+}
+
+.card-title {
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+}
+
+.card-footer {
+    padding: 14px 16px;
+
+}
+
+/* Не посещенное состояние ссылки */
+.a_link:link {
+    color: blue;
+    text-decoration: none;
+}
+
+/* Посещенное состояние ссылки */
+.a_link:visited {
+    color: purple;
+    text-decoration: none;
+}
+
+/* Состояние ссылки при наведении курсора */
+.a_link:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+/* Состояние ссылки при нажатии */
+.a_link:active {
+    color: green;
+    text-decoration: none;
+}
+
+/* Состояние элемента в фокусе (например, при использовании клавиатурной навигации) */
+.a_link:focus {
+    outline: 2px solid orange;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+td:empty {
+    background-color: lightgray;
+}
+
+th {
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 8px;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 8px;
+    text-align: center;
+}
+
+table tr:first-child {
+    background-color: green;
+}
+
+table tr:last-child {
+    background-color: rgba(181, 18, 201, 0.84);
+}
+
+table tr:nth-child(2) {
+    background-color: rgba(9, 88, 255, 0.84);
+
+}
+
+.stats__list ul li:first-child {
+    background-color: green;
+}
+
+.stats__list ul li:last-child {
+    background-color: rgba(181, 18, 201, 0.84);
+}
+
+.stats__list ul li:nth-child(2) {
+    background-color: rgba(9, 88, 255, 0.84);
+}
+
+blockquote {
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 20px 0;
+}
+
+blockquote::selection {
+    background-color: yellow;
+    color: black;
+}
+
+/* Стили для цитат на русском языке */
+blockquote.russian::before {
+    content: "«";
+    font-size: 24px;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+}
+
+blockquote.russian::after {
+    content: "»";
+    font-size: 24px;
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+}
+
+/* Стили для цитат на английском языке */
+blockquote.english::before {
+    content: "“";
+    font-size: 24px;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+}
+
+blockquote.english::after {
+    content: "”";
+    font-size: 24px;
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+}
+
+/*Form styles*/
+
+input, textarea {
+    border-radius: 12px;
+}
+
+/* Стили для доступных элементов формы */
+input:enabled,
+select:enabled,
+textarea:enabled {
+    border: 2px solid green;
+    background-color: #f0f0f0;
+}
+
+/* Стили для обязательных элементов формы */
+input:required,
+select:required,
+textarea:required {
+    border: 2px solid red;
+}
+
+/* Стили для заблокированных элементов формы */
+input:disabled,
+select:disabled,
+textarea:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Стили для элементов со значениями вне диапазона */
+input:out-of-range {
+    border: 1px solid orange;
+}
+
+/* Стили для включенных флажков */
+input[type="checkbox"]:checked {
+    background-color: yellow;
+}
+
+/* Стили для включенных переключателей */
+input[type="radio"]:checked {
+    border: 2px solid blue;
 }
 
 
+.coupons__list {
+    list-style: disc outside none;
+    display: flex;
+    flex-direction: column;
+}
+
+.coupon__item {
+    position: relative;
+    padding-left: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.coupon__item::before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    content: "\2022"; /* Код символа Unicode для маркера • */
+    transform: translateY(-50%);
+}
+
+
+.last-post__wrapper {
+    position: relative;
+    height: 70vh;
+    width: 100%;
+}
+
+.last-post__item {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+@keyframes slide {
+    0% {
+        left: 20px;
+    }
+    50% {
+        left: 220px;
+    }
+    100% {
+        left: 440px;
+    }
+}
+
+.add__section {
+    position: relative;
+    cursor: pointer;
+}
+
+.add-text {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    color: #fff;
+}
+
+.add-subtext {
+    color: #fff;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(100%);
+    transition: transform 2s linear .5s;
+}
+
+
+.add__section:hover .add-text {
+    animation-name: slide;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-delay: .5s;
+    animation-iteration-count: infinite;
+}
+
+.add__section:hover .add-subtext {
+    transform: translate3d(440px, 100%, 0);
+}
+
+/* Изменение вида курсора при наведении на кнопки */
+button:hover {
+    cursor: pointer;
+}
+
+/* Отступы и поля для любого текстового фрагмента */
+.text-fragment {
+    text-indent: 20px;
+    padding: 5px;
+}
+
+/* Заголовки (или другие фрагменты текста) с помощью text-transform */
+h1, h2, h3 {
+    text-transform: uppercase;
+}
+
+
+/* Межстрочный интервал */
+p, span {
+    line-height: 1.5;
+}
+
+/* Капитель для любого фрагмента */
+.capitalized-text {
+    font-variant: small-caps;
+}
+
+/* Интервал между словами и символами */
+.spacing {
+    word-spacing: 5px;
+    letter-spacing: 2px;
+}
+
+/* Перенос и разрыв слов */
+.word-break {
+    word-break: break-all;
+    hyphens: auto;
+}
 
 
 

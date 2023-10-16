@@ -1,0 +1,9 @@
+.btn-transport {
+    display: block;
+    clear: left;
+    max-width: 160px;
+}
+.transport__item {
+    float: left;
+    width: 300px;
+}

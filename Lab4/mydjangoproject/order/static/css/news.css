@@ -1,0 +1,47 @@
+.news__list {
+    flex-wrap: wrap;
+}
+
+.news__item {
+    flex: 1 1 33%;
+}
+
+@media screen and (max-width: 980px) {
+    .news__item {
+        flex: 1 1 50%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .news__item {
+        flex: 1 1 100%;
+    }
+}
+
+.news__list p::first-letter {
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: red;
+}
+
+.news__list p::before {
+    content: "Начало контекста. ";
+}
+
+.news__list p::after {
+    content: ". Конец контекста.";
+}
+
+.news-text {
+    width: 100%; /* Ширина выделенной области */
+    height: 4rem; /* Высота выделенной области */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.news-detail__text {
+    columns: 3; /* Количество колонок */
+    column-gap: 20px; /* Отступ между колонками */
+}

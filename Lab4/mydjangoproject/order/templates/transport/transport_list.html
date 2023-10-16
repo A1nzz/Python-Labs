@@ -2,46 +2,50 @@
 
 {% block content %}
 
-{% if transport_list %}
-<section class="services bg-secondary pt-4">
-    <div class="container">
-        <h2 style="margin-left: 2rem; color: white">Transport</h2>
-        <div class="services__inner d-flex flex-wrap">
+    {% if transport_list %}
+        <section class="transport bg-secondary pt-4">
+            <div class="container">
+                <h2 style="margin-left: 2rem; color: white">Transport</h2>
+                <div class="transport__inner">
 
-            {% for transport in transport_list %}
+                    {% for transport in transport_list %}
 
-            <div class="card" style="width: 18rem; margin: 2rem">
-                <img src="../../static/images/1500x500.jpeg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ transport.name }}</h5>
+                        <div class="card transport__item">
+                            <img src="../../static/images/1500x500.jpeg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ transport.name }}</h5>
 
-                    <p class="card-text">
-                        Тип: {{transport.type}}
-                        <br>
-                        Тип кузова: {{transport.body_type}}
-                    </p>
+                                <p class="card-text">
+                                    Тип: {{ transport.type }}
+                                    <br>
+                                    Тип кузова: {{ transport.body_type }}
+                                </p>
+                            </div>
+                            {% if user.is_staff %}
+                                <div class="card-footer">
+                                    <a href="{% url 'edit_transport' transport.id %}" class="btn btn-warning-outline">Edit</a>
+                                    <a href="{% url 'delete_transport' transport.id %}" class="btn btn-danger-outline">Remove</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    {% if request.user.is_staff %}
+
+                        <a href="{% url 'create-transport' %}" class="btn transparent-btn btn-transport">Add
+                            Transport</a>
+
+
+                    {% endif %}
+
+
                 </div>
-                {% if user.is_staff %}
-                <div class="d-flex justify-content-between p-2">
-                    <a href="{% url 'edit_transport' transport.id %}" class="btn btn-warning">Edit</a>
-                    <a href="{% url 'delete_transport' transport.id %}" class="btn btn-danger">Remove</a>
-                </div>
-                {% endif %}
             </div>
-            {% endfor %}
-
+        </section>
+    {% else %}
+        <div class="container">
+            <p>There are no transport.</p>
         </div>
-    </div>
-</section>
-{% else %}
-<div class="container">
-    <p>There are no transport.</p>
-</div>
-{% endif %}
-{% if request.user.is_staff %}
-<div class="container">
-    <a href="{% url 'create-transport' %}" class="btn btn-success mt-2">Add Transport</a>
-</div>
-{% endif %}
+    {% endif %}
+
 
 {% endblock %}

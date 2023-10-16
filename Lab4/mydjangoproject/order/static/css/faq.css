@@ -1,0 +1,37 @@
+
+.faq__section {
+    margin-top: 20px;
+}
+
+.faq__title {
+    font-size: 30px;
+}
+
+.faq__title abbr {
+    text-decoration: none;
+}
+
+.faq__list {
+    display: flex;
+    flex-direction: column;
+}
+
+.faq__item {
+    margin-bottom: 10px;
+    border: #000 1px solid;
+    border-radius: 10px;
+    width: 360px;
+    padding: 10px;
+}
+
+.faq__item summary {
+    text-transform: uppercase;
+    user-select: none;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.faq__item time {
+    font-style: italic;
+    font-weight: 300;
+}

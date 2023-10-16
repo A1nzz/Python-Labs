@@ -1,18 +1,26 @@
-<h1>Добавить отзыв</h1>
+{% extends "base_generic.html" %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.email.errors }}
-    <label for="{{ form.email.id_for_label }}">Email:</label>
-    {{ form.email }}
-    <br>
-    {{ form.rating.errors }}
-    <label for="{{ form.rating.id_for_label }}">Оценка:</label>
-    {{ form.rating }}
-    <br>
-    {{ form.text.errors }}
-    <label for="{{ form.text.id_for_label }}">Текст:</label>
-    {{ form.text }}
-    <br>
-    <button type="submit">Отправить</button>
-</form>
+{% block content %}
+    <div class="container">
+        <h1>Добавить отзыв</h1>
+
+        <form method="post" class="review-form">
+            {% csrf_token %}
+            {{ form.email.errors }}
+            <label class="form-title" for="{{ form.email.id_for_label }}">Email:</label>
+            {{ form.email }}
+            <br>
+            {{ form.rating.errors }}
+            <label class="form-title" for="{{ form.rating.id_for_label }}">Оценка:</label>
+            {{ form.rating }}
+            <br>
+            {{ form.text.errors }}
+            <label class="form-title" for="{{ form.text.id_for_label }}">Текст:</label>
+            {{ form.text }}
+            <br>
+            <button class="btn transparent-btn" type="submit">Отправить</button>
+        </form>
+    </div>
+
+
+{% endblock %}

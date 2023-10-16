@@ -9,9 +9,9 @@
 
 
             {% if faq_list %}
-                <div class="faq__list d-flex flex-wrap">
+                <div class="faq__list">
                     {% for faq_item in faq_list %}
-                        <details>
+                        <details class="faq__item">
                             <summary>{{ faq_item.question }}</summary>
                             {{ faq_item.response }}<br>
                             <time datetime="{{ faq_item.date }}">{{ faq_item.date }}</time>
