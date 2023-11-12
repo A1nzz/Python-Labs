@@ -185,6 +185,10 @@ class Faq(models.Model):
 class Coupon(models.Model):
     name = models.CharField(max_length=255, blank=False)
 
+    number = models.IntegerField(blank=False, null=False)
+
+    discount = models.IntegerField(blank=False, null=False)
+
     def __str__(self):
         return f'{self.name}'
 

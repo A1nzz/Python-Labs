@@ -22,6 +22,8 @@
     <section>
         <div class="home-start__section">
             <div class="container">
+                <img src="../static/images/track-left.png" alt="" style="height: 200px;" id="track_1">
+                <img src="../static/images/track-right.png" alt="" style="height: 200px;" id="track_2">
                 <div class="row">
                     <div class="start-text">
                         <h1>StathamTrans</h1>
@@ -83,7 +85,6 @@
         </div>
     </section>
 
-
     <section class="partners__section">
         <div class="container">
             <h2 class="partners__title">Наши партнеры</h2>
@@ -102,6 +103,32 @@
                 </a>
             </div>
         </div>
+    </section>
+    <section class="banner__section">
+        <div id="banner1" class="banner active">
+            <a href="https://www.apple.com/">
+                <img src="../static/images/Apple_M3_MacBook.jpg" alt="Баннер 1">
+            </a>
+        </div>
+
+        <div id="banner2" class="banner">
+            <a href="https://mak.by/ru/">
+                <img src="../static/images/McDonalds-overview.webp" alt="Баннер 2">
+            </a>
+        </div>
+
+        <!-- Добавьте дополнительные баннеры, если необходимо -->
+        {% if request.user.is_staff %}
+            <form id="intervalForm">
+                <label for="intervalInput">Интервал (в секундах):</label>
+                <input type="number" id="intervalInput" min="1" value="5">
+            </form>
+        {% else %}
+            <form id="intervalForm" style="opacity: 0;">
+                <label for="intervalInput">Интервал (в секундах):</label>
+                <input type="number" id="intervalInput" min="1" value="5">
+            </form>
+        {% endif %}
     </section>
     {% if service_list %}
         <section class="services bg-secondary pt-4" id="services">
@@ -129,5 +156,35 @@
     {% else %}
         <p>There are no services.</p>
     {% endif %}
+    <section class="table__section">
+        <div class="container">
+            <input type="number" id="tableSizeInput" placeholder="Введите размер таблицы" value="4">
+            <button id="generateButton">Сгенерировать таблицу</button>
+            <button id="transposeButton">Транспонировать таблицу</button>
+            <input type="number" id="limitInput" placeholder="Введите ограничение ячеек" value="3" min="1">
+            <button id="addRowButton">Добавить строку</button>
+            <button id="addColumnButton">Добавить столбец</button>
+            <table id="resultTable"></table>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <form id="toyForm">
+                <label for="nameInput">Название игрушки:</label>
+                <input type="text" id="nameInput" required><br>
+
+                <label for="priceInput">Стоимость игрушки (в рублях):</label>
+                <input type="number" id="priceInput" required><br>
+
+                <label for="ageInput">Возрастные границы (например, от 2 до 5 лет):</label>
+                <input type="text" id="ageInput" required><br>
+
+                <button type="submit">Добавить игрушку</button>
+            </form>
+
+            <h3>Наиболее дорогие игрушки:</h3>
+            <ul id="resultList"></ul>
+        </div>
+    </section>
 {% endblock %}
 

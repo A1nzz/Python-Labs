@@ -1,6 +1,25 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+    <section>
+        <div class="container">
+            <form id="settings">
+                <h2>Настройки</h2>
+                <label>
+                    <input type="checkbox" name="font-size-checkbox" onchange="toggleFontSize()"> Изменить размер шрифта
+                </label>
+                <br>
+                <label>
+                    <input type="checkbox" name="text-color-checkbox" onchange="toggleTextColor()"> Изменить цвет текста
+                </label>
+                <br>
+                <label>
+                    <input type="checkbox" name="background-color-checkbox" onchange="toggleBackgroundColor()"> Изменить
+                    цвет фона страницы
+                </label>
+            </form>
+        </div>
+    </section>
     <section class="info__section">
         <div class="container">
             <h1 class="info__title">О нас</h1>

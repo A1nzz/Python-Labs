@@ -1,3 +1,5 @@
+import decimal
+
 import requests
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
@@ -111,7 +113,8 @@ def create_user_order(request):
         order.transport = Transport.objects.get(pk=transport_pk)
 
         order.service = CompanyService.objects.get(pk=request.POST.get("service"))
-        order.cost = order.service.cost
+        discount = Coupon.objects.get(pk=request.POST.get("coupon")).discount
+        order.cost = order.service.cost * (decimal.Decimal(1) - discount * decimal.Decimal(0.01))
 
         order.save()
     return HttpResponseRedirect("/")
@@ -241,6 +244,7 @@ def delete_client(request, id):
 
 def services_list(request):
     transport_list = Transport.objects.all()
+    coupons = Coupon.objects.all()
     drivers_list = Driver.objects.exclude(is_staff=True)
     cargo_types_list = CargoType.objects.all()
     category = request.GET.get('category', '')
@@ -269,7 +273,8 @@ def services_list(request):
                                                                          'categories': categories,
                                                                          'transport_list': transport_list,
                                                                          'drivers_list': drivers_list,
-                                                                         'cargo_types_list': cargo_types_list})
+                                                                         'cargo_types_list': cargo_types_list,
+                                                                         'coupons': coupons})
 
 
 @login_required

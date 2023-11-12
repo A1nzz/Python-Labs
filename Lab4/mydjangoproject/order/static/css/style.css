@@ -112,11 +112,31 @@ footer {
 
 .home-start__section {
     position: relative;
+    overflow: hidden;
 
     background: linear-gradient(rgba(255, 255, 255, 0.0005), rgba(0, 0, 0, 1)), url("../images/1500x500.jpeg") no-repeat center center;
     background-size: cover;
     padding: 200px 0;
     margin-bottom: 30px;
+}
+
+.home-start__section #track_1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    pointer-events: none;
+
+
+}
+
+.home-start__section #track_2 {
+    position: absolute;
+    bottom: 0;
+    object-fit: cover;
+    pointer-events: none;
+
+    right: 0;
 }
 
 
@@ -308,6 +328,7 @@ footer {
 table {
     border-collapse: collapse;
     margin: 20px 0;
+    border: #000000;
 }
 
 td:empty {
@@ -316,27 +337,17 @@ td:empty {
 
 th {
     background-color: #f0f0f0;
+    border: black;
     text-align: center;
     padding: 8px;
     text-transform: uppercase;
 }
 
 td {
+    border: black;
+
     padding: 8px;
     text-align: center;
-}
-
-table tr:first-child {
-    background-color: green;
-}
-
-table tr:last-child {
-    background-color: rgba(181, 18, 201, 0.84);
-}
-
-table tr:nth-child(2) {
-    background-color: rgba(9, 88, 255, 0.84);
-
 }
 
 .stats__list ul li:first-child {
@@ -350,6 +361,7 @@ table tr:nth-child(2) {
 .stats__list ul li:nth-child(2) {
     background-color: rgba(9, 88, 255, 0.84);
 }
+
 
 blockquote {
     display: inline-block;
@@ -563,4 +575,22 @@ p, span {
 }
 
 
+.banner {
+    display: none; /* Скрываем все баннеры по умолчанию */
+    width: 300px;
+    height: 250px;
+}
+
+
+.banner.active {
+    display: block; /* Отображаем активный баннер */
+}
+
+.highlight-even {
+  background-color: #aaffaa;
+}
+
+.highlight-odd {
+  background-color: #ffaaaa;
+}
 

@@ -4,13 +4,27 @@
     flex-wrap: wrap;
 }
 
-.review {
+.review__wrapper {
     flex: 1 1 33%;
+    min-height: 30ch;
+    position: relative;
+    perspective: 500em;
+
+}
+
+.review {
+    --posx: 50%;
+    --posy: 50%;
+    --rotateX: 0;
+    --rotateY: 0;
+    position: absolute;
     border: #000000 2px solid;
     border-radius: 12px;
     margin: 10px 12px;
     padding: 10px 12px;
     background-color: #fff;
+    inset: 1rem;
+    transform: perspective(100em) translatez(0em) rotateY(var(--rotateX)) rotateX(var(--rotateY));
 }
 
 
@@ -37,4 +51,11 @@
     padding: 5px;
     border-radius: 12px;
     margin-bottom: 10px;
+}
+
+@keyframes reset-card {
+    to {
+        background-position: 50% 50%;
+        transform: rotateY(0) rotateX(0);
+    }
 }

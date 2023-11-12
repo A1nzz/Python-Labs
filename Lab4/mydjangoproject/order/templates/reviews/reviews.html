@@ -6,12 +6,16 @@
             <h1>Список отзывов</h1>
             <div class="reviews__inner">
                 {% for review in reviews %}
-                    <article class="review">
-                        <h3>{{ review.client }}</h3>
-                        <p>Оценка: {{ review.rating }}</p>
-                        <p class="word-break">{{ review.text }}</p>
-                        <p class="review__date">Дата: {{ review.date }}</p>
-                    </article>
+                    <div class="review__wrapper">
+
+
+                        <article class="review">
+                            <h3>{{ review.client }}</h3>
+                            <p>Оценка: {{ review.rating }}</p>
+                            <p class="word-break">{{ review.text }}</p>
+                            <p class="review__date">Дата: {{ review.date }}</p>
+                        </article>
+                    </div>
                     {% empty %}
                     <p>Нет отзывов.</p>
                 {% endfor %}
